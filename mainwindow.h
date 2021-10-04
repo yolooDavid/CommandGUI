@@ -1,5 +1,7 @@
 #pragma once
 
+#include "command.h"
+
 #include <QFrame>
 #include <QGridLayout>
 #include <QLabel>
@@ -21,8 +23,11 @@ public:
 
 private slots:
   void handleExecute();
+  void handleHistorySwitched();
 
 private:
+  std::vector<Command> commands;
+
   QWidget *m_centralWidget;
   QGridLayout *m_layout;
   QLabel *m_command_label;
