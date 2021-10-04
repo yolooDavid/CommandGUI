@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include <iostream>
+#include "command.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   m_command_label = new QLabel("Command:");
@@ -34,8 +34,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   setWindowTitle("CommandGUI");
   resize(600, 800);
 
-  //connect(m_button, &QPushButton::released, this, &MainWindow::handleButton);
+  connect(m_execute, &QPushButton::released, this, &MainWindow::handleExecute);
+  connect(m_command_text, &QLineEdit::returnPressed, this, &MainWindow::handleExecute);
 }
 
-void MainWindow::handleButton() {
+void MainWindow::handleExecute() {
+  Command command(m_command_text->text());
+  command.execute();
+  m_output_text->setText(command.get_result());
+  m_exit_status->setText(command.get_return_code());
 }

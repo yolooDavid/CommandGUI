@@ -20,7 +20,7 @@ public:
   explicit MainWindow(QWidget *parent = nullptr);
 
 private slots:
-  void handleButton();
+  void handleExecute();
 
 private:
   QWidget *m_centralWidget;
